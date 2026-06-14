@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Stock Price Prediction System | Fintech Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+    
+    <div class="container">
+        <header id="header-bar">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <h1>Hybrid Stock Price Prediction System</h1>
+                </div>
+            </div>
+        </header>
+
+        <div id="search-section" class="search-section-hero">
+            <div class="search-container search-centered">
+                <input type="text" id="ticker-input" placeholder="Enter Company or Ticker (e.g. TSLA, AAPL)..." autocomplete="off">
+                <button id="predict-btn">
+                    <span class="btn-text">Predict</span>
+                    <i class="fas fa-bolt"></i>
+                </button>
+            </div>
+        </div>
+
+        <main id="dashboard" class="hidden">
+            <div class="prediction-controls">
+                <button id="main-arch-btn" class="arch-btn active">Main Analysis</button>
+                <button id="alt-arch-btn" class="arch-btn">Confirmation Engine</button>
+            </div>
+
+            <!-- ARCHITECTURE 1: Main Prediction -->
+            <div id="main-prediction" class="arch-section">
+                <div class="grid">
+                    <!-- Prediction Card -->
+                    <div class="card glass prediction-card" id="pred-card">
+                        <h3>Prediction Outcome</h3>
+                        <div class="prediction-value" id="prediction-label">---</div>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidence-fill" style="width: 0%"></div>
+                        </div>
+                        <p>AI Confidence: <span id="confidence-text">0%</span></p>
+                        <div class="prediction-explanation" id="prediction-explanation">---</div>
+                    </div>
+
+                    <!-- Sentiment Card -->
+                    <div class="card glass sentiment-card">
+                        <h3>Market Sentiment</h3>
+                        <div class="sentiment-value" id="sentiment-label">Neutral</div>
+                        <div class="sentiment-score">Score: <span id="sentiment-score">0.00</span></div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARCHITECTURE 2: Confirmation Engine -->
+            <div id="alt-prediction" class="arch-section hidden">
+                <div class="grid">
+                    <!-- Confirmation Engine Card -->
+                    <div class="card glass prediction-card alt-pred-card full-width">
+                        <h3>ARCHITECTURE 2</h3>
+                        <h4>AI CONFIRMATION ENGINE</h4>
+                        
+                        <div class="confirmation-flow">
+                            <div class="flow-section">
+                                <div class="flow-item">
+                                    <span class="flow-label">1-Day Sentiment</span>
+                                    <span class="flow-value" id="sentiment-1day">---</span>
+                                </div>
+                                <div class="flow-item">
+                                    <span class="flow-label">3-Day Sentiment</span>
+                                    <span class="flow-value" id="sentiment-3day">---</span>
+                                </div>
+                            </div>
+
+                            <div class="flow-section">
+                                <div class="flow-label">Sentiment OR Logic:</div>
+                                <div class="flow-equation" id="sentiment-or-equation">
+                                    <span id="sentiment-1day-val">0</span> OR <span id="sentiment-3day-val">0</span> = <span id="sentiment-or-val">0</span>
+                                </div>
+                            </div>
+
+                            <div class="flow-section">
+                                <div class="flow-label">Technical Signal:</div>
+                                <div class="flow-value" id="technical-signal-display">---</div>
+                            </div>
+
+                            <div class="flow-section">
+                                <div class="flow-label">Final AND Logic:</div>
+                                <div class="flow-equation" id="final-and-equation">
+                                    <span id="technical-signal-val">0</span> AND <span id="sentiment-confirmation-val">0</span> = <span id="final-output-val">0</span>
+                                </div>
+                            </div>
+
+                            <div class="flow-section final-result">
+                                <div class="flow-label">FINAL RESULT:</div>
+                                <div class="final-signal" id="final-signal-display">---</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="loader" class="hidden">
+            <div class="spinner"></div>
+            <p>Analyzing market patterns & news sentiment...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
